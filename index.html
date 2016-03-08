@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="fetch">
+<head>
+    <meta charset="UTF-8">
+    <title>Separatism</title>
+    <link type="text/css" rel="stylesheet"
+              href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+        <link type="text/css" rel="stylesheet"
+              href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+    <link rel="stylesheet" href="Stylesheet.css">
+
+</head>
+<body>
+<br>
+<div class="row">
+    <div class="container">
+        <h1>Games</h1>
+
+        <div data-ng-controller="dbCtrl">
+
+
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Link</th>
+                    <th>Image</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="games in data">
+                    <td>{{games.Game_name}}</td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    var fetch = angular.module('fetch', []);
+
+    fetch.controller('dbCtrl', ['$scope', '$http', function ($scope, $http) {
+        $http.get("connect.php")
+                .success(function(data){
+                    $scope.data = data;
+                })
+                .error(function() {
+                    $scope.data = "error in fetching data";
+                });
+    }]);
+
+</script>
+
+</html>
