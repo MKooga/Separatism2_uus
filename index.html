@@ -32,7 +32,7 @@
                 <tbody>
                 <tr data-ng-repeat="games in data">
                     <td>{{games.Game_name}}</td>
-
+                    <td><a name="link{{games.Game_id}}" href={{games.Game_link}}>{{games.Game_link}}</a></td>
                 </tr>
                 </tbody>
             </table>
