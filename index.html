@@ -18,19 +18,21 @@
         <h1>Games</h1>
 
         <div data-ng-controller="dbCtrl">
-
-
+            <span class="label">Ordered By: {{orderByField}}, Reverse Sort: {{reverseSort}}</span><br><br>
+            <input type="text" name="search" data-ng-model="searchFilter" data-ng-hide="checked" class="form-control">
 
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>Name</th>
+                    <th><a name="orderName" href="#" ng-click="orderByField='name'; reverseSort = !reverseSort">
+                        Name <span ng-show="orderByField == 'name'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+                    </a></th>
                     <th>Link</th>
                     <th>Image</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="games in data">
+                <tr data-ng-repeat="games in data | filter:searchFilter |orderBy:orderByField:reverseSort">
                     <td>{{games.Game_name}}</td>
                     <td><a name="link{{games.Game_id}}" href={{games.Game_link}}>{{games.Game_link}}</a></td>
                     <td><img src={{games.Game_img}}></td>
